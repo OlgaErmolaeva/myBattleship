@@ -22,8 +22,8 @@ public class ServerConfiguration {
 
         Map<String, HttpHandler> httpHandlers = new HashMap<>();
         httpHandlers.put(Config.GENERATOR_SERVICE, shipsGeneratorHttpInvokerServiceExporter());
-        httpHandlers.put(Config.GAME_INITIALIZER_SERVICE,gameInitializerHttpInvokerServiceExporter());
-        httpHandlers.put(Config.SHOOT_SERVICE,gameInitializerHttpInvokerServiceExporter());
+        httpHandlers.put(Config.GAME_INITIALIZER_SERVICE, gameInitializerHttpInvokerServiceExporter());
+        httpHandlers.put(Config.SHOOT_SERVICE, shootServiceHttpInvokerServiceExporter());
         httpServerFactoryBean.setContexts(httpHandlers);
 
         return httpServerFactoryBean;
@@ -59,11 +59,17 @@ public class ServerConfiguration {
     }
 
     @Bean
-    public GameInitializer gameInitializer() {return new GameInitializerImpl();}
+    public GameInitializer gameInitializer() {
+        return new GameInitializerImpl();
+    }
 
     @Bean
-    public ShootService shootService() {return new ShootServiceImpl();}
+    public ShootService shootService() {
+        return new ShootServiceImpl();
+    }
 
     @Bean
-    public Board board() {return new Board();}
+    public Board board() {
+        return new Board();
+    }
 }

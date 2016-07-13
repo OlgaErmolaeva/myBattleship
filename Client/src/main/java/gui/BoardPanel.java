@@ -23,7 +23,10 @@ public class BoardPanel extends JPanel {
     @Autowired
     ShootService shootService;
 
+    private BoardType boardType;
+
     public BoardPanel(BoardType boardType) {
+        this.boardType = boardType;
         setEmptyBoard();
         addListener(boardType);
     }
@@ -79,6 +82,10 @@ public class BoardPanel extends JPanel {
     @Override
     public void update(Graphics g) {
         paint(g);
+    }
+
+    public BoardType getBoardType() {
+        return boardType;
     }
 }
 

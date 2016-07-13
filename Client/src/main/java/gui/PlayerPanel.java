@@ -20,22 +20,22 @@ public class PlayerPanel {
     @Autowired
     GameInitializer gameInitializer;
 
-    private BoardPanel board;
     private Set<Ship> ships;
     private Player playerID;
+    private BoardPanel board;
 
-    public JPanel createPlayerPanel(BoardType boardType) {
+    public JPanel createPlayerPanel(BoardPanel board) {
+        this.board = board;
         JPanel playerPanel = new JPanel(new BorderLayout());
-        board = new BoardPanel(boardType);
 
-        JLabel title = new JLabel(boardType.toString() + " board");
+        JLabel title = new JLabel(board.getBoardType().toString() + " board");
         title.setFont(new Font("Dialog", Font.BOLD, 15));
 
         playerPanel.add(title, BorderLayout.NORTH);
 
         playerPanel.add(board, BorderLayout.CENTER);
 
-        if (boardType.equals(BoardType.Yours)) playerPanel.add(userButtonsPanel(), BorderLayout.SOUTH);
+        if (board.getBoardType().equals(BoardType.Yours)) playerPanel.add(userButtonsPanel(), BorderLayout.SOUTH);
         else playerPanel.add(rivalButtonsPanel(), BorderLayout.SOUTH);
 
         return playerPanel;

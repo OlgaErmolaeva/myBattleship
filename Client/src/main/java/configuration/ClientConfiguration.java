@@ -8,7 +8,6 @@ import main.GuiRunner;
 import models.BoardType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;
 import services.GameInitializer;
 import services.ShipGenerator;
@@ -16,7 +15,6 @@ import services.ShootService;
 
 @Configuration
 public class ClientConfiguration {
-    BoardType boardType;
 
     @Bean
     public GuiRunner guiRunner() {
@@ -29,9 +27,25 @@ public class ClientConfiguration {
     }
 
     @Bean
-    @Scope("prototype")
-    public PlayerPanel playerPanel() {
-        return new PlayerPanel();
+    public PlayerPanel userPanel() {
+        PlayerPanel playerPanel = new PlayerPanel();
+        return playerPanel;
+    }
+
+    @Bean
+    public PlayerPanel rivalPanel() {
+        PlayerPanel playerPanel = new PlayerPanel();
+        return playerPanel;
+    }
+
+    @Bean
+    public BoardPanel userBoardPanel() {
+        return new BoardPanel(BoardType.Yours);
+    }
+
+    @Bean
+    public BoardPanel rivalBoardPanel() {
+        return new BoardPanel(BoardType.Rivals);
     }
 
     // To try may be dependency on this class throw exeption
@@ -63,16 +77,4 @@ public class ClientConfiguration {
         httpInvoker.setServiceUrl(serviceURL);
         return httpInvoker;
     }
-
-    @Bean
-    @Scope("prototype")
-    public BoardPanel boardPanel() {
-        if(boardType == null){
-            boardType = BoardType.Rivals;
-        }else{
-            boardType = BoardType.Yours;
-        }
-        return new BoardPanel(boardType);
-    }
-
 }

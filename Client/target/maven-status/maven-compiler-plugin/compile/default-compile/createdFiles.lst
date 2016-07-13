@@ -1,0 +1,8 @@
+gui\GameRules.class
+main\GuiRunner.class
+gui\BoardPanel$1.class
+gui\PlayerPanel.class
+gui\BattleshipMainFrame.class
+gui\BoardPanel.class
+configuration\ClientConfiguration.class
+main\ClientMain.class

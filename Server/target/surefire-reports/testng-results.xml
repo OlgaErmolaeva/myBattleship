@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="model.BoardTest" duration-ms="88" started-at="2016-07-13T19:48:50Z" finished-at="2016-07-13T19:48:50Z">
+    <groups>
+    </groups>
+    <test name="Command line test" duration-ms="88" started-at="2016-07-13T19:48:50Z" finished-at="2016-07-13T19:48:50Z">
+      <class name="model.BoardTest">
+        <test-method status="PASS" signature="TestBoardState()[pri:0, instance:model.BoardTest@6b71769e]" name="TestBoardState" duration-ms="71" started-at="2016-07-13T21:48:50Z" finished-at="2016-07-13T21:48:50Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TestBoardState -->
+      </class> <!-- model.BoardTest -->
+    </test> <!-- Command line test -->
+  </suite> <!-- model.BoardTest -->
+</testng-results>

@@ -19,14 +19,20 @@ public class BattleshipMainFrame {
     @Autowired
     PlayerPanel rivalPanel;
 
+    @Autowired
+    BoardPanel userBoardPanel;
+
+    @Autowired
+    BoardPanel rivalBoardPanel;
+
     private void setMainFrameProperties(){
         mainFrame.setSize(new Dimension(750,420));
         mainFrame.setTitle("Battleship");
         mainFrame.setLayout(new GridLayout(1,2));
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
-        mainFrame.add(userPanel.createPlayerPanel(BoardType.Yours));
-        mainFrame.add(rivalPanel.createPlayerPanel(BoardType.Rivals));
+        mainFrame.add(userPanel.createPlayerPanel(userBoardPanel));
+        mainFrame.add(rivalPanel.createPlayerPanel(rivalBoardPanel));
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
     }

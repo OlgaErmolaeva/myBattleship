@@ -1,0 +1,7 @@
+configuration\ServerConfiguration.class
+model\Board.class
+services\ShootServiceImpl.class
+services\ShipGeneratorImpl.class
+services\GameInitializerImpl.class
+main\ServerMain.class
+model\Cell.class
