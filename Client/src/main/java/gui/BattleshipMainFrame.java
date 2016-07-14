@@ -31,8 +31,10 @@ public class BattleshipMainFrame {
         mainFrame.setLayout(new GridLayout(1,2));
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
+        JPanel panel =rivalPanel.createPlayerPanel(rivalBoardPanel);
+        userPanel.addListener(rivalBoardPanel,panel);
         mainFrame.add(userPanel.createPlayerPanel(userBoardPanel));
-        mainFrame.add(rivalPanel.createPlayerPanel(rivalBoardPanel));
+        mainFrame.add(panel);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
     }

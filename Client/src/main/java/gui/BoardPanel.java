@@ -27,16 +27,14 @@ public class BoardPanel extends JPanel {
     private BoardType boardType;
 
 
-    private Player player ;
-
-    public BoardPanel(BoardType boardType,Player player) {
-        this.player =player;
+    public BoardPanel(BoardType boardType) {
         this.boardType = boardType;
         setEmptyBoard();
-        addListener(boardType);
     }
 
-
+    public void setState(Point p,BoardElementState updateState){
+        userBoardState.put(p,updateState);
+    }
 
     public void setUserBoardState(Set<Point> coordinates, BoardElementState state) {
         coordinates.stream().forEach(point -> userBoardState.put(point, state));
@@ -53,16 +51,17 @@ public class BoardPanel extends JPanel {
         repaint();
     }
 
-    private void addListener(final BoardType boardType) {
-        this.addMouseListener(new MouseAdapter() {
+    public void addListener(BoardPanel board,JPanel boardPanel, Player player) {
+        boardPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
-                if (boardType.equals(BoardType.Rivals)) {
-                    Point p = new Point(mouseEvent.getX() / (weight / size), mouseEvent.getY() / (height / size));
-                    BoardElementState updateState = shootService.shootOn(player,p);
-                    userBoardState.put(p, updateState);
-                    repaint();
+                Point p = new Point(mouseEvent.getX() / (weight / size), mouseEvent.getY() / (height / size));
+                if (player != null) {
+                    BoardElementState updateState = shootService.shootOn(player, p);
+                    board.setState(p, updateState);
+                    boardPanel.repaint();
                 }
+
             }
         });
     }

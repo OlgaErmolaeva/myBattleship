@@ -24,8 +24,11 @@ public class PlayerPanel {
     @Autowired
     GameInitializer gameInitializer;
 
+    private JButton startButton = new JButton("Start game");
+    private JButton generateShipsButton = new JButton("Generate ships");
+
     private Set<Ship> ships;
-    private  Player player = Player.SECOND;
+    private Player player;
     private BoardPanel boardPanel;
 
     public JPanel createPlayerPanel(BoardPanel board) {
@@ -48,15 +51,9 @@ public class PlayerPanel {
 
     private JPanel userButtonsPanel() {
         JPanel buttons = new JPanel();
-        JButton generateShipsButton = new JButton("Generate ships");
-        JButton startButton = new JButton("Start game");
         startButton.setEnabled(false);
 
         //TODO cut out this part of game logic
-        startButton.addActionListener(e -> {
-                //player = identifierService.identifiesPlayer();
-                gameInitializer.initGame(player, ships);
-        });
         generateShipsButton.addActionListener(e -> {
             boardPanel.setEmptyBoard();
             startButton.setEnabled(true);
@@ -68,7 +65,6 @@ public class PlayerPanel {
             }
         });
 
-        startButton.addActionListener(actionEvent -> generateShipsButton.setEnabled(false));
         JButton rulesButton = new JButton("Rules");
 
         rulesButton.addActionListener(e -> {
@@ -87,5 +83,14 @@ public class PlayerPanel {
         turnLabel.setFont(new Font("Dialog", Font.BOLD, 15));
         labelPanel.add(turnLabel);
         return labelPanel;
+    }
+
+    public void addListener(BoardPanel board,JPanel rivalPanel) {
+        startButton.addActionListener(e -> {
+            player = identifierService.identifiesPlayer();
+            boardPanel.addListener(board,rivalPanel, player);
+            gameInitializer.initGame(player, ships);
+            generateShipsButton.setEnabled(false);
+        });
     }
 }

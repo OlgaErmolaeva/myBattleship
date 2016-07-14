@@ -42,12 +42,12 @@ public class ClientConfiguration {
 
     @Bean
     public BoardPanel userBoardPanel() {
-        return new BoardPanel(BoardType.Yours, Player.SECOND);
+        return new BoardPanel(BoardType.Yours);
     }
 
     @Bean
     public BoardPanel rivalBoardPanel() {
-        return new BoardPanel(BoardType.Rivals, Player.FIRST);
+        return new BoardPanel(BoardType.Rivals);
     }
 
 

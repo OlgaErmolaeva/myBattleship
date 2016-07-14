@@ -8,5 +8,5 @@ services/ShootService.class
 models/Ship.class
 models/Board.class
 config/Config.class
-models/BoardElementState.class
 services/GameInitializer.class
+models/BoardElementState.class

@@ -1,7 +1,7 @@
-/home/olgaermolaeva/IdeaProjects/battleship/Client/src/main/java/gui/BoardPanel.java
-/home/olgaermolaeva/IdeaProjects/battleship/Client/src/main/java/main/GuiRunner.java
-/home/olgaermolaeva/IdeaProjects/battleship/Client/src/main/java/main/ClientMain.java
-/home/olgaermolaeva/IdeaProjects/battleship/Client/src/main/java/configuration/ClientConfiguration.java
-/home/olgaermolaeva/IdeaProjects/battleship/Client/src/main/java/gui/GameRules.java
-/home/olgaermolaeva/IdeaProjects/battleship/Client/src/main/java/gui/PlayerPanel.java
-/home/olgaermolaeva/IdeaProjects/battleship/Client/src/main/java/gui/BattleshipMainFrame.java
+/home/lukasz/IdeaProjects/myBattleship/Client/src/main/java/gui/BattleshipMainFrame.java
+/home/lukasz/IdeaProjects/myBattleship/Client/src/main/java/main/ClientMain.java
+/home/lukasz/IdeaProjects/myBattleship/Client/src/main/java/main/GuiRunner.java
+/home/lukasz/IdeaProjects/myBattleship/Client/src/main/java/gui/GameRules.java
+/home/lukasz/IdeaProjects/myBattleship/Client/src/main/java/gui/PlayerPanel.java
+/home/lukasz/IdeaProjects/myBattleship/Client/src/main/java/configuration/ClientConfiguration.java
+/home/lukasz/IdeaProjects/myBattleship/Client/src/main/java/gui/BoardPanel.java
