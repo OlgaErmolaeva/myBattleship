@@ -1,5 +1,6 @@
 package model;
 
+import models.Board;
 import models.BoardElementState;
 import models.Ship;
 import org.testng.annotations.Test;

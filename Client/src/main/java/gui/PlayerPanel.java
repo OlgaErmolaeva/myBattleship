@@ -6,6 +6,7 @@ import models.Player;
 import models.Ship;
 import org.springframework.beans.factory.annotation.Autowired;
 import services.GameInitializer;
+import services.PlayerIdentifierService;
 import services.ShipGenerator;
 
 import javax.swing.*;
@@ -18,10 +19,13 @@ public class PlayerPanel {
     ShipGenerator shipGenerator;
 
     @Autowired
+    PlayerIdentifierService identifierService;
+
+    @Autowired
     GameInitializer gameInitializer;
 
     private Set<Ship> ships;
-    private Player playerID;
+    private Player player;
     private BoardPanel board;
 
     public JPanel createPlayerPanel(BoardPanel board) {
@@ -50,7 +54,8 @@ public class PlayerPanel {
 
         //TODO cut out this part of game logic
         startButton.addActionListener(e -> {
-            playerID = gameInitializer.initGame(ships);
+                player = identifierService.identifiesPlayer();
+                gameInitializer.initGame(player, ships);
         });
         generateShipsButton.addActionListener(e -> {
             board.setEmptyBoard();

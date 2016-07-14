@@ -1,8 +1,5 @@
-package model;
+package models;
 
-
-import models.BoardElementState;
-import models.Ship;
 
 import java.awt.*;
 

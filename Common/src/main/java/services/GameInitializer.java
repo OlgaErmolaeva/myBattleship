@@ -7,5 +7,5 @@ import models.Ship;
 import java.util.Set;
 
 public interface GameInitializer {
-    Player initGame(Set<Ship> ships);
+    void initGame(Player player, Set<Ship> ships);
 }

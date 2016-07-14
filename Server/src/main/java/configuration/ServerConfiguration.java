@@ -2,9 +2,10 @@ package configuration;
 
 import com.sun.net.httpserver.HttpHandler;
 import config.Config;
-import model.Board;
+import models.Board;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.remoting.httpinvoker.SimpleHttpInvokerServiceExporter;
 import org.springframework.remoting.support.SimpleHttpServerFactoryBean;
 import services.*;
@@ -24,6 +25,7 @@ public class ServerConfiguration {
         httpHandlers.put(Config.GENERATOR_SERVICE, shipsGeneratorHttpInvokerServiceExporter());
         httpHandlers.put(Config.GAME_INITIALIZER_SERVICE, gameInitializerHttpInvokerServiceExporter());
         httpHandlers.put(Config.SHOOT_SERVICE, shootServiceHttpInvokerServiceExporter());
+        httpHandlers.put(Config.PLAYER_ID_SERVICE, playerIdentifierHttpInvokerServiceExporter());
         httpServerFactoryBean.setContexts(httpHandlers);
 
         return httpServerFactoryBean;
@@ -54,6 +56,14 @@ public class ServerConfiguration {
     }
 
     @Bean
+    public SimpleHttpInvokerServiceExporter playerIdentifierHttpInvokerServiceExporter() {
+        SimpleHttpInvokerServiceExporter simpleHttpInvokerServiceExporter = new SimpleHttpInvokerServiceExporter();
+        simpleHttpInvokerServiceExporter.setServiceInterface(PlayerIdentifierService.class);
+        simpleHttpInvokerServiceExporter.setService(playerIdentifierService());
+        return simpleHttpInvokerServiceExporter;
+    }
+
+    @Bean
     public ShipGenerator shipGenerator() {
         return new ShipGeneratorImpl();
     }
@@ -69,6 +79,12 @@ public class ServerConfiguration {
     }
 
     @Bean
+    public PlayerIdentifierService playerIdentifierService() {
+        return new PlayerIdentifierServiceImpl();
+    }
+
+    @Bean
+    @Scope ("prototype")
     public Board board() {
         return new Board();
     }

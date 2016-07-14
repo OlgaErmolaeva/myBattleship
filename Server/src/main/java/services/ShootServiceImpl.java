@@ -1,7 +1,7 @@
 package services;
 
 
-import model.Board;
+import models.Board;
 import models.BoardElementState;
 import org.springframework.beans.factory.annotation.Autowired;
 

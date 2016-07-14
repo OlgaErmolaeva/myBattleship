@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;
 import services.GameInitializer;
+import services.PlayerIdentifierService;
 import services.ShipGenerator;
 import services.ShootService;
 
@@ -70,10 +71,19 @@ public class ClientConfiguration {
     }
 
     @Bean
-    public HttpInvokerProxyFactoryBean shootServerHttpInvokerProxyFactoryBean() {
+    public HttpInvokerProxyFactoryBean shootServiceHttpInvokerProxyFactoryBean() {
         HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
         String serviceURL = "http://" + Config.HOST_NAME + ":" + Config.SERVER_PORT + Config.SHOOT_SERVICE;
         httpInvoker.setServiceInterface(ShootService.class);
+        httpInvoker.setServiceUrl(serviceURL);
+        return httpInvoker;
+    }
+
+    @Bean
+    public HttpInvokerProxyFactoryBean playerIdentifierHttpInvokerProxyFactoryBean() {
+        HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
+        String serviceURL = "http://" + Config.HOST_NAME + ":" + Config.SERVER_PORT + Config.PLAYER_ID_SERVICE;
+        httpInvoker.setServiceInterface(PlayerIdentifierService.class);
         httpInvoker.setServiceUrl(serviceURL);
         return httpInvoker;
     }

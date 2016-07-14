@@ -1,7 +1,4 @@
-package model;
-
-import models.BoardElementState;
-import models.Ship;
+package models;
 
 import java.awt.*;
 import java.util.Set;
@@ -9,9 +6,9 @@ import java.util.Set;
 
 public class Board {
 
-
-    private Cell[][] cells = new Cell[10][10];
     public Set<Ship> ships;
+    private Cell[][] cells = new Cell[10][10];
+    private Player player;
 
     // TODO setter or constructor???? How to set dependency on Set of Ships in board
 
@@ -38,5 +35,8 @@ public class Board {
         cells[point.x][point.y].state = BoardElementState.SINKED;
     }
 
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 
 }
