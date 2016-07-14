@@ -10,15 +10,25 @@ import java.util.Set;
 
 public class GameInitializerImpl implements GameInitializer {
 
-    private Player player;
+    @Autowired
+    private Board firstPlayerBoard;
 
     @Autowired
-    private Board board;
+    private Board secondPlayerBoard;
+
 
     @Override
     public void initGame(Player player, Set<Ship> ships) {
-        this.player = player;
-        board.init(ships);
-        board.setPlayer(player);
+        if(player == Player.FIRST) {
+            firstPlayerBoard.init(ships);
+        }
+        else{
+            secondPlayerBoard.init(ships);
+        }
+    }
+
+    @Override
+    public Board getOpponentBoardFor(Player player) {
+        return player == Player.FIRST ? secondPlayerBoard : firstPlayerBoard;
     }
 }

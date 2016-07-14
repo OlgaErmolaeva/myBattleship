@@ -26,13 +26,13 @@ public class PlayerPanel {
 
     private Set<Ship> ships;
     private Player player;
-    private BoardPanel board;
+    private BoardPanel boardPanel;
 
     public JPanel createPlayerPanel(BoardPanel board) {
-        this.board = board;
+        this.boardPanel = board;
         JPanel playerPanel = new JPanel(new BorderLayout());
 
-        JLabel title = new JLabel(board.getBoardType().toString() + " board");
+        JLabel title = new JLabel(board.getBoardType().toString() + " board ");
         title.setFont(new Font("Dialog", Font.BOLD, 15));
 
         playerPanel.add(title, BorderLayout.NORTH);
@@ -55,14 +55,15 @@ public class PlayerPanel {
         //TODO cut out this part of game logic
         startButton.addActionListener(e -> {
                 player = identifierService.identifiesPlayer();
+                boardPanel.setPlayer(player);
                 gameInitializer.initGame(player, ships);
         });
         generateShipsButton.addActionListener(e -> {
-            board.setEmptyBoard();
+            boardPanel.setEmptyBoard();
             startButton.setEnabled(true);
             try {
                 ships = shipGenerator.generateShips();
-                ships.stream().forEach(ship -> board.setUserBoardState(ship.getCoordinates(), BoardElementState.SHIP));
+                ships.stream().forEach(ship -> boardPanel.setUserBoardState(ship.getCoordinates(), BoardElementState.SHIP));
             } catch (Exception exception) {
                 JOptionPane.showMessageDialog(null, "Cannot establish connection with server", "Connection error", JOptionPane.ERROR_MESSAGE);
             }

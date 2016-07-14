@@ -2,6 +2,7 @@ package gui;
 
 import models.BoardElementState;
 import models.BoardType;
+import models.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import services.ShootService;
 
@@ -25,10 +26,19 @@ public class BoardPanel extends JPanel {
 
     private BoardType boardType;
 
+
+    private Player player;
+
     public BoardPanel(BoardType boardType) {
         this.boardType = boardType;
         setEmptyBoard();
+        player = Player.FIRST;
         addListener(boardType);
+    }
+
+    public void setPlayer(Player player){
+      //  this.player=player;
+     //   addListener(boardType);
     }
 
     public void setUserBoardState(Set<Point> coordinates, BoardElementState state) {
@@ -47,12 +57,12 @@ public class BoardPanel extends JPanel {
     }
 
     private void addListener(final BoardType boardType) {
-        addMouseListener(new MouseAdapter() {
+        this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
                 if (boardType.equals(BoardType.Rivals)) {
                     Point p = new Point(mouseEvent.getX() / (weight / size), mouseEvent.getY() / (height / size));
-                    BoardElementState updateState = shootService.shootOn(p);
+                    BoardElementState updateState = shootService.shootOn(player,p);
                     userBoardState.put(p, updateState);
                     repaint();
                 }

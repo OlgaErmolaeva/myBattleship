@@ -17,6 +17,35 @@ import java.util.Map;
 public class ServerConfiguration {
 
     @Bean
+    public ShipGenerator shipGenerator() {
+        return new ShipGeneratorImpl();
+    }
+
+    @Bean
+    public GameInitializer gameInitializer() {
+        return new GameInitializerImpl();
+    }
+
+    @Bean
+    public ShootService shootService() {
+        return new ShootServiceImpl();
+    }
+
+    @Bean
+    public PlayerIdentifierService playerIdentifierService() {
+        return new PlayerIdentifierServiceImpl();
+    }
+
+    @Bean
+    public Board firstPlayerBoard() {
+        return new Board();
+    }
+    @Bean
+    public Board secondPlayerBoard() {
+        return new Board();
+    }
+
+    @Bean
     public SimpleHttpServerFactoryBean serverFactoryBean() {
         SimpleHttpServerFactoryBean httpServerFactoryBean = new SimpleHttpServerFactoryBean();
         httpServerFactoryBean.setPort(Config.SERVER_PORT);
@@ -61,31 +90,5 @@ public class ServerConfiguration {
         simpleHttpInvokerServiceExporter.setServiceInterface(PlayerIdentifierService.class);
         simpleHttpInvokerServiceExporter.setService(playerIdentifierService());
         return simpleHttpInvokerServiceExporter;
-    }
-
-    @Bean
-    public ShipGenerator shipGenerator() {
-        return new ShipGeneratorImpl();
-    }
-
-    @Bean
-    public GameInitializer gameInitializer() {
-        return new GameInitializerImpl();
-    }
-
-    @Bean
-    public ShootService shootService() {
-        return new ShootServiceImpl();
-    }
-
-    @Bean
-    public PlayerIdentifierService playerIdentifierService() {
-        return new PlayerIdentifierServiceImpl();
-    }
-
-    @Bean
-    @Scope ("prototype")
-    public Board board() {
-        return new Board();
     }
 }

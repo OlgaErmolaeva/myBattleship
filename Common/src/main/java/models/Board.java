@@ -35,8 +35,5 @@ public class Board {
         cells[point.x][point.y].state = BoardElementState.SINKED;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
 
 }
