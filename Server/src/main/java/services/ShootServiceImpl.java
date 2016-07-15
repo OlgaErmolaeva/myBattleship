@@ -20,9 +20,9 @@ public class ShootServiceImpl implements ShootService{
     @Override
     public BoardElementState shootOn(Player player, Point point) {
         if(player==Player.FIRST){
-            return secondPlayerBoard.shootOnCell(point);
-        }else if(player==Player.SECOND){
             return firstPlayerBoard.shootOnCell(point);
+        }else if(player==Player.SECOND){
+            return secondPlayerBoard.shootOnCell(point);
         }
         return null;
     }

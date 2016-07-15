@@ -25,7 +25,7 @@ public class PlayerPanel {
     GameInitializer gameInitializer;
 
     private Set<Ship> ships;
-    private Player player;
+    private  Player player = Player.SECOND;
     private BoardPanel boardPanel;
 
     public JPanel createPlayerPanel(BoardPanel board) {
@@ -54,8 +54,7 @@ public class PlayerPanel {
 
         //TODO cut out this part of game logic
         startButton.addActionListener(e -> {
-                player = identifierService.identifiesPlayer();
-                boardPanel.setPlayer(player);
+                //player = identifierService.identifiesPlayer();
                 gameInitializer.initGame(player, ships);
         });
         generateShipsButton.addActionListener(e -> {
@@ -73,7 +72,7 @@ public class PlayerPanel {
         JButton rulesButton = new JButton("Rules");
 
         rulesButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, GameRules.rulesMessage, "Game rules", JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(null, GameRules.rulesMessage, "Game rules", JOptionPane.INFORMATION_MESSAGE);
         });
 
         buttons.add(generateShipsButton);

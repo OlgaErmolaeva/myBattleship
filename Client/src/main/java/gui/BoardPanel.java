@@ -27,19 +27,16 @@ public class BoardPanel extends JPanel {
     private BoardType boardType;
 
 
-    private Player player;
+    private Player player ;
 
-    public BoardPanel(BoardType boardType) {
+    public BoardPanel(BoardType boardType,Player player) {
+        this.player =player;
         this.boardType = boardType;
         setEmptyBoard();
-        player = Player.FIRST;
         addListener(boardType);
     }
 
-    public void setPlayer(Player player){
-      //  this.player=player;
-     //   addListener(boardType);
-    }
+
 
     public void setUserBoardState(Set<Point> coordinates, BoardElementState state) {
         coordinates.stream().forEach(point -> userBoardState.put(point, state));

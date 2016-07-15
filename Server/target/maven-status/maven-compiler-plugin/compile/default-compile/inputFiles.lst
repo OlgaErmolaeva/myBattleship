@@ -1,7 +1,6 @@
-C:\Work\sources\myBattleship\Server\src\main\java\services\ShootServiceImpl.java
-C:\Work\sources\myBattleship\Server\src\main\java\main\ServerMain.java
-C:\Work\sources\myBattleship\Server\src\main\java\configuration\ServerConfiguration.java
-C:\Work\sources\myBattleship\Server\src\main\java\services\ShipGeneratorImpl.java
-C:\Work\sources\myBattleship\Server\src\main\java\model\Board.java
-C:\Work\sources\myBattleship\Server\src\main\java\model\Cell.java
-C:\Work\sources\myBattleship\Server\src\main\java\services\GameInitializerImpl.java
+/home/olgaermolaeva/IdeaProjects/battleship/Server/src/main/java/services/ShootServiceImpl.java
+/home/olgaermolaeva/IdeaProjects/battleship/Server/src/main/java/services/ShipGeneratorImpl.java
+/home/olgaermolaeva/IdeaProjects/battleship/Server/src/main/java/services/GameInitializerImpl.java
+/home/olgaermolaeva/IdeaProjects/battleship/Server/src/main/java/main/ServerMain.java
+/home/olgaermolaeva/IdeaProjects/battleship/Server/src/main/java/services/PlayerIdentifierServiceImpl.java
+/home/olgaermolaeva/IdeaProjects/battleship/Server/src/main/java/configuration/ServerConfiguration.java

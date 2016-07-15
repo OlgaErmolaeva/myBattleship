@@ -2,16 +2,16 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="model.BoardTest" duration-ms="88" started-at="2016-07-13T19:48:50Z" finished-at="2016-07-13T19:48:50Z">
+  <suite name="Surefire suite" duration-ms="117" started-at="2016-07-15T06:09:02Z" finished-at="2016-07-15T06:09:02Z">
     <groups>
     </groups>
-    <test name="Command line test" duration-ms="88" started-at="2016-07-13T19:48:50Z" finished-at="2016-07-13T19:48:50Z">
+    <test name="Surefire test" duration-ms="117" started-at="2016-07-15T06:09:02Z" finished-at="2016-07-15T06:09:02Z">
       <class name="model.BoardTest">
-        <test-method status="PASS" signature="TestBoardState()[pri:0, instance:model.BoardTest@6b71769e]" name="TestBoardState" duration-ms="71" started-at="2016-07-13T21:48:50Z" finished-at="2016-07-13T21:48:50Z">
+        <test-method status="PASS" signature="TestBoardState()[pri:0, instance:model.BoardTest@63d4e2ba]" name="TestBoardState" duration-ms="103" started-at="2016-07-15T08:09:02Z" finished-at="2016-07-15T08:09:02Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TestBoardState -->
       </class> <!-- model.BoardTest -->
-    </test> <!-- Command line test -->
-  </suite> <!-- model.BoardTest -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
 </testng-results>

@@ -9,7 +9,7 @@ import java.util.Set;
 public class Ship implements Serializable {
 
     private Set<Point> coordinates = new HashSet<>();
-    public boolean isAlive;
+    public boolean isAlive = true;
 
     private Ship() {
     }

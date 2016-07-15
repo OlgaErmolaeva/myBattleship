@@ -6,6 +6,7 @@ import gui.BoardPanel;
 import gui.PlayerPanel;
 import main.GuiRunner;
 import models.BoardType;
+import models.Player;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;
@@ -41,15 +42,13 @@ public class ClientConfiguration {
 
     @Bean
     public BoardPanel userBoardPanel() {
-        return new BoardPanel(BoardType.Yours);
+        return new BoardPanel(BoardType.Yours, Player.SECOND);
     }
 
     @Bean
     public BoardPanel rivalBoardPanel() {
-        return new BoardPanel(BoardType.Rivals);
+        return new BoardPanel(BoardType.Rivals, Player.FIRST);
     }
-
-    // To try may be dependency on this class throw exeption
 
 
     @Bean
