@@ -1,5 +1,6 @@
 package gui;
 
+import exceptions.NotActualPlayerException;
 import models.BoardElementState;
 import models.BoardType;
 import models.Player;
@@ -32,8 +33,8 @@ public class BoardPanel extends JPanel {
         setEmptyBoard();
     }
 
-    public void setState(Point p,BoardElementState updateState){
-        userBoardState.put(p,updateState);
+    public void setState(Point p, BoardElementState updateState) {
+        userBoardState.put(p, updateState);
     }
 
     public void setUserBoardState(Set<Point> coordinates, BoardElementState state) {
@@ -51,17 +52,20 @@ public class BoardPanel extends JPanel {
         repaint();
     }
 
-    public void addListener(BoardPanel board,JPanel boardPanel, Player player) {
+    public void addListener(BoardPanel board, JPanel boardPanel, Player player) {
         boardPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
                 Point p = new Point(mouseEvent.getX() / (weight / size), mouseEvent.getY() / (height / size));
                 if (player != null) {
-                    BoardElementState updateState = shootService.shootOn(player, p);
-                    board.setState(p, updateState);
-                    boardPanel.repaint();
+                    try {
+                        BoardElementState updateState = shootService.shootOn(player, p);
+                        board.setState(p, updateState);
+                        boardPanel.repaint();
+                    } catch (NotActualPlayerException e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage(), "Move error", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
-
             }
         });
     }

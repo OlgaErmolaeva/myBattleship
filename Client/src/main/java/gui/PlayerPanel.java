@@ -43,7 +43,7 @@ public class PlayerPanel {
         playerPanel.add(board, BorderLayout.CENTER);
 
         if (board.getBoardType().equals(BoardType.Yours)) playerPanel.add(userButtonsPanel(), BorderLayout.SOUTH);
-        else playerPanel.add(rivalButtonsPanel(), BorderLayout.SOUTH);
+        //else playerPanel.add(rivalButtonsPanel(), BorderLayout.SOUTH);
 
         return playerPanel;
     }
@@ -68,7 +68,7 @@ public class PlayerPanel {
         JButton rulesButton = new JButton("Rules");
 
         rulesButton.addActionListener(e -> {
-            //JOptionPane.showMessageDialog(null, GameRules.rulesMessage, "Game rules", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, GameRules.rulesMessage, "Game rules", JOptionPane.INFORMATION_MESSAGE);
         });
 
         buttons.add(generateShipsButton);
@@ -77,13 +77,13 @@ public class PlayerPanel {
         return buttons;
     }
 
-    private JPanel rivalButtonsPanel() {
+    /*private JPanel rivalButtonsPanel() {
         JPanel labelPanel = new JPanel();
         JLabel turnLabel = new JLabel("Your turn");
         turnLabel.setFont(new Font("Dialog", Font.BOLD, 15));
         labelPanel.add(turnLabel);
         return labelPanel;
-    }
+    }*/
 
     public void addListener(BoardPanel board,JPanel rivalPanel) {
         startButton.addActionListener(e -> {

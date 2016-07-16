@@ -5,7 +5,6 @@ import config.Config;
 import models.Board;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 import org.springframework.remoting.httpinvoker.SimpleHttpInvokerServiceExporter;
 import org.springframework.remoting.support.SimpleHttpServerFactoryBean;
 import services.*;
@@ -34,6 +33,11 @@ public class ServerConfiguration {
     @Bean
     public PlayerIdentifierService playerIdentifierService() {
         return new PlayerIdentifierServiceImpl();
+    }
+
+    @Bean
+    public ActualPlayerService actualPlayerService() {
+        return new ActualPlayer1v1ServiceImpl();
     }
 
     @Bean
