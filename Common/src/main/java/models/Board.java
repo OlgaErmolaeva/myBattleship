@@ -1,14 +1,14 @@
 package models;
 
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 
 public class Board {
 
-    public Set<Ship> ships;
     private Cell[][] cells = new Cell[10][10];
-    private Player player;
 
     // TODO setter or constructor???? How to set dependency on Set of Ships in board
 
@@ -31,9 +31,13 @@ public class Board {
         return cells[point.x][point.y].shoot(point);
     }
 
-    public void killCell(Point point) {
-        cells[point.x][point.y].state = BoardElementState.SINKED;
+    public Map<Point, BoardElementState> getBoardState() {
+        Map<Point, BoardElementState> result = new HashMap<>();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                result.put(new Point(i,j), cells[i][j].getState());
+            }
+        }
+        return result;
     }
-
-
 }

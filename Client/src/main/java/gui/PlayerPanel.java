@@ -5,12 +5,15 @@ import models.BoardType;
 import models.Player;
 import models.Ship;
 import org.springframework.beans.factory.annotation.Autowired;
+import services.BoardStateService;
 import services.GameInitializer;
 import services.PlayerIdentifierService;
 import services.ShipGenerator;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class PlayerPanel {
@@ -20,6 +23,9 @@ public class PlayerPanel {
 
     @Autowired
     PlayerIdentifierService identifierService;
+
+    @Autowired
+    BoardStateService boardStateService;
 
     @Autowired
     GameInitializer gameInitializer;
@@ -91,6 +97,29 @@ public class PlayerPanel {
             boardPanel.addListener(board,rivalPanel, player);
             gameInitializer.initGame(player, ships);
             generateShipsButton.setEnabled(false);
+
+
+            new SwingWorker<Void, Map<Point, BoardElementState>>() {
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    while(true) {
+                        publish(boardStateService.getBoardState(player));
+
+                        try {
+                            Thread.sleep(1000L);
+                        } catch (InterruptedException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                }
+
+                @Override
+                protected void process(List<Map<Point, BoardElementState>> chunks) {
+                    boardPanel.setState(chunks.get(chunks.size() - 1));
+                    boardPanel.repaint();
+                }
+            }.execute();
         });
     }
 }

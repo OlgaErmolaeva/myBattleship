@@ -27,7 +27,6 @@ public class BoardPanel extends JPanel {
 
     private BoardType boardType;
 
-
     public BoardPanel(BoardType boardType) {
         this.boardType = boardType;
         setEmptyBoard();
@@ -35,6 +34,10 @@ public class BoardPanel extends JPanel {
 
     public void setState(Point p, BoardElementState updateState) {
         userBoardState.put(p, updateState);
+    }
+
+    public void setState(Map<Point, BoardElementState> state)   {
+        userBoardState.putAll(state);
     }
 
     public void setUserBoardState(Set<Point> coordinates, BoardElementState state) {

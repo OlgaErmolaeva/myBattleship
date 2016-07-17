@@ -12,7 +12,11 @@ public class Cell {
         this.state = BoardElementState.EMPTY;
     }
 
-    public void putShip(Ship ship){
+    public BoardElementState getState() {
+        return state;
+    }
+
+    public void putShip(Ship ship) {
         state = state.SHIP;
         myShip = ship;
     }
@@ -23,9 +27,9 @@ public class Cell {
         }
         if (state == BoardElementState.SHIP) {
             myShip.shoot(coordinate);
-            if(myShip.isAlive){
+            if (myShip.isAlive) {
                 state = BoardElementState.SHOOTEDSHIP;
-            }else{
+            } else {
                 state = BoardElementState.SINKED;
             }
         }

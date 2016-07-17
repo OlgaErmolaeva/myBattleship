@@ -6,14 +6,10 @@ import gui.BoardPanel;
 import gui.PlayerPanel;
 import main.GuiRunner;
 import models.BoardType;
-import models.Player;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;
-import services.GameInitializer;
-import services.PlayerIdentifierService;
-import services.ShipGenerator;
-import services.ShootService;
+import services.*;
 
 @Configuration
 public class ClientConfiguration {
@@ -83,6 +79,15 @@ public class ClientConfiguration {
         HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
         String serviceURL = "http://" + Config.HOST_NAME + ":" + Config.SERVER_PORT + Config.PLAYER_ID_SERVICE;
         httpInvoker.setServiceInterface(PlayerIdentifierService.class);
+        httpInvoker.setServiceUrl(serviceURL);
+        return httpInvoker;
+    }
+
+    @Bean
+    public HttpInvokerProxyFactoryBean boardStateHttpInvokerProxyFactoryBean() {
+        HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
+        String serviceURL = "http://" + Config.HOST_NAME + ":" + Config.SERVER_PORT + Config.BOARD_STATE_SERVICE;
+        httpInvoker.setServiceInterface(BoardStateService.class);
         httpInvoker.setServiceUrl(serviceURL);
         return httpInvoker;
     }

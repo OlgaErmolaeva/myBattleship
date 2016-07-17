@@ -41,6 +41,11 @@ public class ServerConfiguration {
     }
 
     @Bean
+    public BoardStateService boardStateService()    {
+        return new BoardStateServiceImpl();
+    }
+
+    @Bean
     public Board firstPlayerBoard() {
         return new Board();
     }
@@ -59,6 +64,7 @@ public class ServerConfiguration {
         httpHandlers.put(Config.GAME_INITIALIZER_SERVICE, gameInitializerHttpInvokerServiceExporter());
         httpHandlers.put(Config.SHOOT_SERVICE, shootServiceHttpInvokerServiceExporter());
         httpHandlers.put(Config.PLAYER_ID_SERVICE, playerIdentifierHttpInvokerServiceExporter());
+        httpHandlers.put(Config.BOARD_STATE_SERVICE, boardStateHttpInvokerServiceExporter());
         httpServerFactoryBean.setContexts(httpHandlers);
 
         return httpServerFactoryBean;
@@ -93,6 +99,14 @@ public class ServerConfiguration {
         SimpleHttpInvokerServiceExporter simpleHttpInvokerServiceExporter = new SimpleHttpInvokerServiceExporter();
         simpleHttpInvokerServiceExporter.setServiceInterface(PlayerIdentifierService.class);
         simpleHttpInvokerServiceExporter.setService(playerIdentifierService());
+        return simpleHttpInvokerServiceExporter;
+    }
+
+    @Bean
+    public SimpleHttpInvokerServiceExporter boardStateHttpInvokerServiceExporter() {
+        SimpleHttpInvokerServiceExporter simpleHttpInvokerServiceExporter = new SimpleHttpInvokerServiceExporter();
+        simpleHttpInvokerServiceExporter.setServiceInterface(BoardStateService.class);
+        simpleHttpInvokerServiceExporter.setService(boardStateService());
         return simpleHttpInvokerServiceExporter;
     }
 }

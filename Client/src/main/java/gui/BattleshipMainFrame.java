@@ -1,6 +1,5 @@
 package gui;
 
-import models.BoardType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.swing.*;
