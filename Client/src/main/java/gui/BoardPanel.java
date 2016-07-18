@@ -101,5 +101,3 @@ public class BoardPanel extends JPanel {
         return boardType;
     }
 }
-
-

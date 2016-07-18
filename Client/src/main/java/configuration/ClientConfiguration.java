@@ -91,4 +91,13 @@ public class ClientConfiguration {
         httpInvoker.setServiceUrl(serviceURL);
         return httpInvoker;
     }
+
+    @Bean
+    public HttpInvokerProxyFactoryBean actualPlayerHttpInvokerProxyFactoryBean() {
+        HttpInvokerProxyFactoryBean httpInvoker = new HttpInvokerProxyFactoryBean();
+        String serviceURL = "http://" + Config.HOST_NAME + ":" + Config.SERVER_PORT + Config.ACTUAL_PLAYER_SERVICE;
+        httpInvoker.setServiceInterface(ActualPlayerService.class);
+        httpInvoker.setServiceUrl(serviceURL);
+        return httpInvoker;
+    }
 }

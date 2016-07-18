@@ -5,10 +5,7 @@ import models.BoardType;
 import models.Player;
 import models.Ship;
 import org.springframework.beans.factory.annotation.Autowired;
-import services.BoardStateService;
-import services.GameInitializer;
-import services.PlayerIdentifierService;
-import services.ShipGenerator;
+import services.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,6 +26,9 @@ public class PlayerPanel {
 
     @Autowired
     GameInitializer gameInitializer;
+
+    @Autowired
+    ActualPlayerService actualPlayerService;
 
     private JButton startButton = new JButton("Start game");
     private JButton generateShipsButton = new JButton("Generate ships");
@@ -91,10 +91,11 @@ public class PlayerPanel {
         return labelPanel;
     }*/
 
-    public void addListener(BoardPanel board,JPanel rivalPanel) {
+    public void addListener(BoardPanel boardPanel, JPanel rivalPanel) {
         startButton.addActionListener(e -> {
+            startButton.setEnabled(false);
             player = identifierService.identifiesPlayer();
-            boardPanel.addListener(board,rivalPanel, player);
+            this.boardPanel.addListener(boardPanel, rivalPanel, player);
             gameInitializer.initGame(player, ships);
             generateShipsButton.setEnabled(false);
 
@@ -103,11 +104,11 @@ public class PlayerPanel {
 
                 @Override
                 protected Void doInBackground() throws Exception {
-                    while(true) {
+                    while (true) {
                         publish(boardStateService.getBoardState(player));
 
                         try {
-                            Thread.sleep(1000L);
+                            Thread.sleep(100L);
                         } catch (InterruptedException e1) {
                             e1.printStackTrace();
                         }
@@ -116,10 +117,44 @@ public class PlayerPanel {
 
                 @Override
                 protected void process(List<Map<Point, BoardElementState>> chunks) {
-                    boardPanel.setState(chunks.get(chunks.size() - 1));
-                    boardPanel.repaint();
+                    PlayerPanel.this.boardPanel.setState(chunks.get(chunks.size() - 1));
+                    PlayerPanel.this.boardPanel.repaint();
                 }
             }.execute();
+
+
+            new SwingWorker<Void, Boolean>() {
+                @Override
+                protected Void doInBackground() throws Exception {
+                    while (true) {
+                        publish(actualPlayerService.isActualPlayer(player));
+
+                        try {
+                            Thread.sleep(100L);
+                        } catch (InterruptedException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                }
+
+                @Override
+                protected void process(List<Boolean> chunks) {
+                    JLabel turnLabel = null;
+                    if (chunks.get(chunks.size() - 1)) {
+                        turnLabel = new JLabel("Your turn");
+                        turnLabel.setFont(new Font("Dialog", Font.BOLD, 15));
+
+                        //TODO label not appear right now - improve it
+                        rivalPanel.add(turnLabel, BorderLayout.SOUTH);
+                        rivalPanel.repaint();
+                    }
+                }
+            }.execute();
+
+
         });
     }
+
+
+
 }

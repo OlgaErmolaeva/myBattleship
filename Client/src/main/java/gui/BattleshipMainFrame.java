@@ -24,14 +24,14 @@ public class BattleshipMainFrame {
     @Autowired
     BoardPanel rivalBoardPanel;
 
-    private void setMainFrameProperties(){
-        mainFrame.setSize(new Dimension(750,420));
+    private void setMainFrameProperties() {
+        mainFrame.setSize(new Dimension(750, 420));
         mainFrame.setTitle("Battleship");
-        mainFrame.setLayout(new GridLayout(1,2));
+        mainFrame.setLayout(new GridLayout(1, 2));
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
-        JPanel panel =rivalPanel.createPlayerPanel(rivalBoardPanel);
-        userPanel.addListener(rivalBoardPanel,panel);
+        JPanel panel = rivalPanel.createPlayerPanel(rivalBoardPanel);
+        userPanel.addListener(rivalBoardPanel, panel);
         mainFrame.add(userPanel.createPlayerPanel(userBoardPanel));
         mainFrame.add(panel);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

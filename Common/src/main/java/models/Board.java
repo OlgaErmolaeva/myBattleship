@@ -31,7 +31,7 @@ public class Board {
         return cells[point.x][point.y].shoot(point);
     }
 
-    public Map<Point, BoardElementState> getBoardState() {
+    public Map<Point, BoardElementState> getBoardStates() {
         Map<Point, BoardElementState> result = new HashMap<>();
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -39,5 +39,9 @@ public class Board {
             }
         }
         return result;
+    }
+
+    public BoardElementState getCellState(Point point) {
+        return getBoardStates().get(point);
     }
 }

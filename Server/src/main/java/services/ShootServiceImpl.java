@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
 
-public class ShootServiceImpl implements ShootService{
+public class ShootServiceImpl implements ShootService {
 
     @Autowired
     private Board firstPlayerBoard;
@@ -22,18 +22,25 @@ public class ShootServiceImpl implements ShootService{
 
     @Override
     public BoardElementState shootOn(Player player, Point point) throws NotActualPlayerException {
-        if(!actualPlayerService.isActualPlayer(player)) {
+        if (!actualPlayerService.isActualPlayer(player)) {
             throw new NotActualPlayerException("Not your move. Wait.");
         }
 
-        BoardElementState state = null;
-        if(player==Player.FIRST){
+        BoardElementState state;
+        if (player == Player.FIRST) {
+            BoardElementState stateBeforeShoot = secondPlayerBoard.getCellState(point);
+            if (stateBeforeShoot == BoardElementState.EMPTY) {
+                actualPlayerService.changeActualPlayer();
+            }
             state = secondPlayerBoard.shootOnCell(point);
-        }else if(player==Player.SECOND) {
+
+        } else {
+            BoardElementState stateBeforeShoot = firstPlayerBoard.getCellState(point);
+            if (stateBeforeShoot == BoardElementState.EMPTY) {
+                actualPlayerService.changeActualPlayer();
+            }
             state = firstPlayerBoard.shootOnCell(point);
-        }
-        if(state == BoardElementState.SHOOTEDEMPTY) {
-            actualPlayerService.changeActualPlayer();
+
         }
 
         return state;
