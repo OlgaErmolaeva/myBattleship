@@ -7,17 +7,36 @@ public class PlayerIdentifierServiceImpl implements PlayerIdentifierService {
 
     private static int counter = 0;
 
+    private static boolean gameIsReadyToPlay = false;
+
     @Autowired
     private ActualPlayerService actualPlayerService;
 
     @Override
-    public Player identifiesPlayer() throws Exception {
-        if(counter < 2) {
-            counter++;
+    public Player registerPlayer() throws Exception {
+        counter++;
+        if (counter > 2) {
+            throw new Exception("It's already two players in the game, cannot add new player");
+        } else {
+            gameIsReadyToPlay = counter == 2;
+
             Player player = counter % 2 == 1 ? Player.FIRST : Player.SECOND;
             actualPlayerService.initializePlayer(player);
             return player;
         }
-        throw new Exception("Too many players, cannot play");
     }
+
+    @Override
+    public void unregisterPlayer() {
+        counter--;
+    }
+
+    @Override
+    public boolean isPlayersReady() {
+        if (gameIsReadyToPlay) {
+            return counter == 2;
+        }
+        return true;
+    }
+
 }

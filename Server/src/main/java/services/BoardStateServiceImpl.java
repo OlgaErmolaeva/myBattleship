@@ -18,7 +18,7 @@ public class BoardStateServiceImpl implements BoardStateService {
 
     @Override
     public Map<Point, BoardElementState> getBoardState(Player player) {
-        if (player== Player.FIRST)  {
+        if (player == Player.FIRST) {
             return firstPlayerBoard.getBoardStates();
         } else {
             return secondPlayerBoard.getBoardStates();

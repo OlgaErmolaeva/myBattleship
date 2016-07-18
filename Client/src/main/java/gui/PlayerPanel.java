@@ -50,7 +50,6 @@ public class PlayerPanel {
         playerPanel.add(board, BorderLayout.CENTER);
 
         if (board.getBoardType().equals(BoardType.Yours)) playerPanel.add(userButtonsPanel(), BorderLayout.SOUTH);
-        //else playerPanel.add(rivalButtonsPanel(), BorderLayout.SOUTH);
 
         return playerPanel;
     }
@@ -84,20 +83,13 @@ public class PlayerPanel {
         return buttons;
     }
 
-    /*private JPanel rivalButtonsPanel() {
-        JPanel labelPanel = new JPanel();
-        JLabel turnLabel = new JLabel("Your turn");
-        turnLabel.setFont(new Font("Dialog", Font.BOLD, 15));
-        labelPanel.add(turnLabel);
-        return labelPanel;
-    }*/
 
     public void addListener(BoardPanel boardPanel, JPanel rivalPanel, JFrame parentFrame) {
         startButton.addActionListener(e -> {
             startButton.setEnabled(false);
 
             try {
-                player = identifierService.identifiesPlayer();
+                player = identifierService.registerPlayer();
             } catch (Exception exception) {
                 parentFrame.dispatchEvent(new WindowEvent(parentFrame, WindowEvent.WINDOW_CLOSING));
             }
@@ -107,7 +99,7 @@ public class PlayerPanel {
             gameInitializer.initGame(player, ships);
             generateShipsButton.setEnabled(false);
 
-
+            //************************************************************************************************
             new SwingWorker<Void, Map<Point, BoardElementState>>() {
 
                 @Override
@@ -129,14 +121,15 @@ public class PlayerPanel {
                     PlayerPanel.this.boardPanel.repaint();
                 }
             }.execute();
+            //************************************************************************************************
 
 
+            //************************************************************************************************
             new SwingWorker<Void, Boolean>() {
                 @Override
                 protected Void doInBackground() throws Exception {
                     while (true) {
                         publish(actualPlayerService.isActualPlayer(player));
-
                         try {
                             Thread.sleep(100L);
                         } catch (InterruptedException e1) {
@@ -158,11 +151,40 @@ public class PlayerPanel {
                     }
                 }
             }.execute();
+            //************************************************************************************************
 
+            //************************************************************************************************
+            new SwingWorker<Void, Boolean>() {
+                @Override
+                protected Void doInBackground() throws Exception {
+                    while (true) {
+                        boolean result = identifierService.isPlayersReady();
+                        publish(result);
+                        if(!result) {
+                            break;
+                        }
+
+                        try {
+                            Thread.sleep(100L);
+                        } catch (InterruptedException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void process(List<Boolean> chunks) {
+                    if (!chunks.get(chunks.size() - 1)) {
+                        JOptionPane.showMessageDialog(null, "Your opponent run away! End of the game.", "Connection error", JOptionPane.ERROR_MESSAGE);
+                        parentFrame.dispatchEvent(new WindowEvent(parentFrame, WindowEvent.WINDOW_CLOSING));
+                    }
+                }
+            }.execute();
+            //************************************************************************************************
 
         });
     }
-
 
 
 }

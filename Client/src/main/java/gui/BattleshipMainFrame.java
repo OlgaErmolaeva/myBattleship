@@ -1,9 +1,12 @@
 package gui;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import services.PlayerIdentifierService;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class BattleshipMainFrame {
     private JFrame mainFrame = new JFrame();
@@ -24,6 +27,9 @@ public class BattleshipMainFrame {
     @Autowired
     BoardPanel rivalBoardPanel;
 
+    @Autowired
+    PlayerIdentifierService identifierService;
+
     private void setMainFrameProperties() {
         mainFrame.setSize(new Dimension(750, 420));
         mainFrame.setTitle("Battleship");
@@ -34,7 +40,20 @@ public class BattleshipMainFrame {
         userPanel.addListener(rivalBoardPanel, panel, mainFrame);
         mainFrame.add(userPanel.createPlayerPanel(userBoardPanel));
         mainFrame.add(panel);
+        addRunAwayPlayerListener();
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
+
+
+    }
+
+    private void addRunAwayPlayerListener() {
+        mainFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent event) {
+                identifierService.unregisterPlayer();
+                event.getWindow().dispose();
+            }
+        });
     }
 }
