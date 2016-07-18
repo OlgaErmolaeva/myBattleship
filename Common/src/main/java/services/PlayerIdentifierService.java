@@ -4,6 +4,6 @@ import models.Player;
 
 public interface PlayerIdentifierService {
 
-    Player identifiesPlayer();
+    Player identifiesPlayer() throws Exception;
 
 }

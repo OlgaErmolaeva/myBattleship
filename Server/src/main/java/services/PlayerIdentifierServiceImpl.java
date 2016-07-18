@@ -11,10 +11,13 @@ public class PlayerIdentifierServiceImpl implements PlayerIdentifierService {
     private ActualPlayerService actualPlayerService;
 
     @Override
-    public Player identifiesPlayer() {
-        counter++;
-        Player player = counter % 2 == 1 ? Player.FIRST : Player.SECOND;
-        actualPlayerService.initializePlayer(player);
-        return player;
+    public Player identifiesPlayer() throws Exception {
+        if(counter < 2) {
+            counter++;
+            Player player = counter % 2 == 1 ? Player.FIRST : Player.SECOND;
+            actualPlayerService.initializePlayer(player);
+            return player;
+        }
+        throw new Exception("Too many players, cannot play");
     }
 }

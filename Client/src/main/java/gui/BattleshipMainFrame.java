@@ -31,7 +31,7 @@ public class BattleshipMainFrame {
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
         JPanel panel = rivalPanel.createPlayerPanel(rivalBoardPanel);
-        userPanel.addListener(rivalBoardPanel, panel);
+        userPanel.addListener(rivalBoardPanel, panel, mainFrame);
         mainFrame.add(userPanel.createPlayerPanel(userBoardPanel));
         mainFrame.add(panel);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

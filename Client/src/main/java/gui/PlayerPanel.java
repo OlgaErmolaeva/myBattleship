@@ -9,6 +9,7 @@ import services.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -91,10 +92,17 @@ public class PlayerPanel {
         return labelPanel;
     }*/
 
-    public void addListener(BoardPanel boardPanel, JPanel rivalPanel) {
+    public void addListener(BoardPanel boardPanel, JPanel rivalPanel, JFrame parentFrame) {
         startButton.addActionListener(e -> {
             startButton.setEnabled(false);
-            player = identifierService.identifiesPlayer();
+
+            try {
+                player = identifierService.identifiesPlayer();
+            } catch (Exception exception) {
+                parentFrame.dispatchEvent(new WindowEvent(parentFrame, WindowEvent.WINDOW_CLOSING));
+            }
+
+
             this.boardPanel.addListener(boardPanel, rivalPanel, player);
             gameInitializer.initGame(player, ships);
             generateShipsButton.setEnabled(false);
